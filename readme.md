@@ -38,7 +38,7 @@ Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
   "description": "LLM provided incorrect safety procedure information.",
   "severity": "High"
 }
----
+```
 
 ## Project Setup 
-```json
+---
