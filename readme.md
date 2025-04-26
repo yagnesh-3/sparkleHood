@@ -21,7 +21,26 @@ Deployed on [Vercel](https://vercel.com).
 ---
 
 ## 📂 Project Structure
-ai-safety-api/ ├── src/ │ ├── controllers/ │ │ └── incident.controller.ts │ ├── routes/ │ │ └── incident.routes.ts │ ├── models/ │ │ └── incident.model.ts │ ├── middleware/ │ │ └── errorHandler.ts │ ├── config/ │ │ └── db.ts │ ├── app.ts │ └── index.ts ├── prepopulate.ts # optional: seed initial incidents ├── .env ├── README.md ├── package.json ├── tsconfig.json ├── vercel.json
+ai-safety-api/
+ ├── src/ │ 
+ ├── controllers/ │ 
+ │ └── incident.controller.ts │ 
+ ├── routes/ │ 
+ │ └── incident.routes.ts │ 
+ ├── models/ │ 
+ │ └── incident.model.ts │ 
+ ├── middleware/ │ 
+ │ └── errorHandler.ts │ 
+ ├── config/ │ 
+ │ └── db.ts │ 
+ ├── app.ts │ 
+ └── index.ts 
+ ├── prepopulate.ts # optional: seed initial incidents 
+ ├── .env 
+ ├── README.md 
+ ├── package.json 
+ ├── tsconfig.json 
+ ├── vercel.json
 
 
 ---
