@@ -4,7 +4,7 @@ import errorHandler from './middleware/errorHandler';
 const app = express();
 app.use(express.json());
 app.get('/', (req, res) => {
-    res.send("Hello world");
+    res.send("Welcome to AI incident Log api");
 })
 app.use('/incident', incidentRoute)
 app.use(errorHandler)
