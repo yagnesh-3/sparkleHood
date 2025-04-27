@@ -3,98 +3,123 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Safety Incident Log API</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: #24292e;
+            max-width: 1012px;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #f9fafb;
-            color: #333;
         }
 
         h1,
         h2,
+        h3,
+        h4 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+
         h3 {
-            color: #2c3e50;
+            font-size: 1.25em;
+        }
+
+        h4 {
+            font-size: 1em;
+        }
+
+        code {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: rgba(27, 31, 35, 0.05);
+            border-radius: 3px;
+            padding: 0.2em 0.4em;
+            font-size: 85%;
+        }
+
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            padding: 16px;
+            overflow: auto;
+            line-height: 1.45;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 16px;
+            display: block;
+            overflow: auto;
+        }
+
+        th,
+        td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        th {
+            font-weight: 600;
+        }
+
+        tr {
+            background-color: #fff;
+            border-top: 1px solid #c6cbd1;
+        }
+
+        tr:nth-child(2n) {
+            background-color: #f6f8fa;
         }
 
         a {
-            color: #3498db;
+            color: #0366d6;
             text-decoration: none;
         }
 
         a:hover {
             text-decoration: underline;
-            color: #1d6fa5;
-        }
-
-        ul,
-        ol {
-            margin-left: 20px;
-        }
-
-        pre {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            /* background-color: #eef; */
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: #fff;
-        }
-
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tbody tr:hover {
-            background-color: #e0f0ff;
         }
 
         .highlight {
-            background-color: #ffeaa7;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .section {
-            margin-top: 50px;
+            background-color: #fffbdd;
         }
     </style>
 </head>
 
 <body>
-
     <h1>AI Safety Incident Log API</h1>
-    <p>A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents.
-        <a href="https://sparkle-hood-three.vercel.app/" target="_blank">Live Demo</a>.
-    </p>
-
+    <p>A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents. <a
+            href="https://sparkle-hood-three.vercel.app/">Live Demo</a>.</p>
+    <a href="https://sparkle-hood-three.vercel.app/">https://sparkle-hood-three.vercel.app/</a>
     <h2>Table of Contents</h2>
     <ul>
         <li><a href="#tech-stack">Tech Stack</a></li>
@@ -104,267 +129,467 @@
         <li><a href="#folder-purpose">Folder Purpose</a></li>
         <li><a href="#api-endpoints">API Endpoints</a></li>
         <li><a href="#sample-requests-and-responses">Sample Requests and Responses</a></li>
-        <li><a href="#centralized-error-handling">Centralized Error Handling</a></li>
-        <li><a href="#conclusion">Conclusion & Design Decisions</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#centralized-error-handling-in-api">Centralized Error Handling in API</a></li>
+        <li><a href="#conclusion--design-decisions">Conclusion & Design Decisions</a></li>
+        <li><a href="#contact-me">Contact</a></li>
     </ul>
 
-    <div class="section" id="tech-stack">
-        <h2>🛠 Tech Stack</h2>
-        <ul>
-            <li>Node.js</li>
-            <li>Express.js</li>
-            <li>TypeScript</li>
-            <li>MongoDB (Mongoose)</li>
-        </ul>
-    </div>
+    <h2 id="tech-stack">🛠 Tech Stack</h2>
+    <ul>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>TypeScript</li>
+        <li>MongoDB (Mongoose)</li>
+    </ul>
 
-    <div class="section" id="prerequisites">
-        <h2>📋 Prerequisites</h2>
-        <p>Before setting up the project, make sure you have:</p>
-        <ol>
-            <li><strong>Node.js (v14 or higher)</strong> – <a href="https://nodejs.org" target="_blank">Download
-                    here</a></li>
-            <li><strong>npm</strong> – Check using: <code>npm --version</code></li>
-            <li><strong>MongoDB</strong> – Local or <a href="https://www.mongodb.com/cloud/atlas"
-                    target="_blank">MongoDB Atlas</a>.</li>
-            <li><strong>TypeScript</strong> (optional) – Install: <code>npm install -g typescript</code></li>
-        </ol>
-    </div>
+    <h2 id="prerequisites">📋 Prerequisites</h2>
+    <p>Before setting up the project, make sure you have the following installed on your system:</p>
+    <ol>
+        <li><strong>Node.js (v14 or higher)</strong><br>
+            You can download and install Node.js from the official website: <a
+                href="https://nodejs.org">https://nodejs.org</a></li>
+        <li><strong>npm (Node Package Manager)</strong><br>
+            npm is installed automatically with Node.js. You can verify the installation by running:<br>
+            <pre><code>npm --version</code></pre>
+        </li>
+        <li><strong>MongoDB</strong>(for local development)<br>
+            If you're running MongoDB locally, ensure MongoDB is installed and running. Alternatively, you can use a
+            cloud MongoDB service like <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a>.</li>
+        <li><strong>TypeScript</strong>(optional)<br>
+            If you don't have TypeScript installed globally, you can install it by running:<br>
+            <pre><code>npm install -g typescript</code></pre>
+        </li>
+    </ol>
 
-    <div class="section" id="features">
-        <h2>🚀 Features</h2>
-        <ul>
-            <li>Log a new AI incident</li>
-            <li>Retrieve all incidents</li>
-            <li>Retrieve a single incident by ID</li>
-            <li>Delete a single incident by ID</li>
-            <li>API Docs at <code>/api-docs</code></li>
-        </ul>
-    </div>
+    <h2 id="features">🚀 Features</h2>
+    <ul>
+        <li><strong>Log a new AI incident</strong> (title, description, severity)</li>
+        <li><strong>Retrieve all incidents</strong></li>
+        <li><strong>Retrieve a single incident by ID</strong></li>
+        <li><strong>Deletes a single incident by ID</strong></li>
+        <li><strong>API Docs at <code>/api-docs</code></strong></li>
+    </ul>
 
-    <div class="section" id="project-setup-guide">
-        <h2>🛠 Project Setup Guide</h2>
+    <h2 id="project-setup-guide">🛠 Project Setup Guide - AI Safety Incident Log API</h2>
+    <p>Welcome to the setup guide for the <strong>AI Safety Incident Log API</strong>!<br>
+        Follow these simple steps to get the project up and running locally or deploy it on Vercel 🚀.</p>
 
-        <h3>1. 📦 Clone the Repository</h3>
-        <pre><code>git clone https://github.com/yagnesh-3/sparkleHood.git
+    <h3>1. 📦 Clone the Repository</h3>
+    <pre><code>git clone https://github.com/yagnesh-3/sparkleHood.git
 cd sparkleHood</code></pre>
 
-        <h3>2. 📥 Install Dependencies</h3>
-        <pre><code>npm install</code></pre>
+    <h3>2. 📥 Install Dependencies</h3>
+    <pre><code>npm Install</code></pre>
 
-        <h3>3. ⚙️ Setup Environment Variables</h3>
-        <pre><code>PORT=3000
+    <h3>3. ⚙️ Create Environment Variables</h3>
+    <ul>
+        <li>Create a .env file at the root of your project and add the following:</li>
+    </ul>
+    <pre><code>PORT = 3000
 MONGODB_URI=your_mongodb_connection_string</code></pre>
 
-        <h3>4. 🖊 Useful Scripts</h3>
-        <ul>
-            <li>Seed DB: <code>npm run seed</code></li>
-            <li>Dev Mode: <code>npm run dev</code></li>
-            <li>Build: <code>npm run build</code></li>
-            <li>Start Production: <code>npm start</code></li>
-        </ul>
+    <h3>4. 🖊 Project Scripts</h3>
+    <p>In the project directory, you can run the following scripts:</p>
+    <ul>
+        <li><strong>Seed the Database:</strong><br>
+            <pre><code>npm run seed</code></pre>
+            Runs the <code>seed.ts</code> script to populate your database with initial data (such as dummy incidents).
+            This can be useful for testing or development.
+        </li>
+        <li><strong>Development Mode:</strong><br>
+            <pre><code>npm run dev</code></pre>
+            Runs the project in development mode with auto-reloading. It uses <code>nodemon</code> to watch for changes
+            in the <code>src</code> folder and automatically restarts the server using <code>ts-node</code>.
+        </li>
+        <li><strong>Build the Project:</strong><br>
+            <pre><code>npm run build</code></pre>
+            Compiles the TypeScript files into JavaScript and places them in the <code>dist</code> folder.
+        </li>
+        <li><strong>Start the Production Server:</strong><br>
+            <pre><code>npm start</code></pre>
+            Starts the server in production mode, running the compiled JavaScript files from the <code>dist</code>
+            directory.
+        </li>
+    </ul>
 
-        <h3>5. 🚀 Run Locally</h3>
-        <p>Visit <code>http://localhost:3000</code></p>
-        <ul>
-            <li><code>/</code> → Welcome</li>
-            <li><code>/incidents</code> → All incidents</li>
-            <li><code>/api-docs</code> → API Docs</li>
-        </ul>
-    </div>
+    <h3>5. 🚀 Run Locally</h3>
+    <ul>
+        <li>After running npm run dev, your API will be available at:<br>
+            <pre><code>http://localhost:3000</code></pre>
+            Test it by visiting
+        </li>
+        <li><code>/</code> → Welcome message</li>
+        <li><code>/incidents</code> → Fetch all incidents</li>
+        <li><code>/api-docs</code> → API Documentation</li>
+    </ul>
 
-    <div class="section" id="folder-purpose">
-        <h2>🗂 Folder Purpose</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Folder/File</th>
-                    <th>Purpose</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>src/config/db.ts</td>
-                    <td>Database connection</td>
-                </tr>
-                <tr>
-                    <td>src/controllers/incidentController.ts</td>
-                    <td>Handle incidents</td>
-                </tr>
-                <tr>
-                    <td>src/models/incidentModel.ts</td>
-                    <td>Incident schema</td>
-                </tr>
-                <tr>
-                    <td>src/routes/incidentRoutes.ts</td>
-                    <td>Incident API routes</td>
-                </tr>
-                <tr>
-                    <td>src/routes/api-docs.routes.ts</td>
-                    <td>API Docs routes</td>
-                </tr>
-                <tr>
-                    <td>src/middleware/errorHandler.ts</td>
-                    <td>Error handling</td>
-                </tr>
-                <tr>
-                    <td>src/app.ts</td>
-                    <td>Express app setup</td>
-                </tr>
-                <tr>
-                    <td>src/index.ts</td>
-                    <td>Server starter</td>
-                </tr>
-                <tr>
-                    <td>vercel.json</td>
-                    <td>Vercel configuration</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <h2 id="folder-purpose">🛠 Folder Purpose</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Folder/File</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>src/config/db.ts</code></td>
+                <td>Database connection setup.</td>
+            </tr>
+            <tr>
+                <td><code>src/controllers/incidentController.ts</code></td>
+                <td>Incident logic (CRUD operations).</td>
+            </tr>
+            <tr>
+                <td><code>src/models/incidentModel.ts</code></td>
+                <td>Defines Incident types or schema.</td>
+            </tr>
+            <tr>
+                <td><code>src/routes/incidentRoutes.ts</code></td>
+                <td>API endpoints.</td>
+            </tr>
+            <tr>
+                <td><code>src/routes/api-docs.routes.ts</code></td>
+                <td>API endpoint for api-docs.</td>
+            </tr>
+            <tr>
+                <td><code>src/middleware/errorHandler.ts</code></td>
+                <td>Centralized error handling.</td>
+            </tr>
+            <tr>
+                <td><code>src/app.ts</code></td>
+                <td>Initializes Express app, middleware, and routes.</td>
+            </tr>
+            <tr>
+                <td><code>src/index.ts</code></td>
+                <td>Connects database and starts server.</td>
+            </tr>
+            <tr>
+                <td><code>vercel.json</code></td>
+                <td>Config to deploy on Vercel.</td>
+            </tr>
+            <tr>
+                <td><code>.gitignore</code></td>
+                <td>Files/folders to ignore in Git.</td>
+            </tr>
+            <tr>
+                <td><code>tsconfig.json</code></td>
+                <td>TypeScript settings.</td>
+            </tr>
+            <tr>
+                <td><code>README.md</code></td>
+                <td>This file! 📄</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="section" id="api-endpoints">
-        <h2>📄 API Endpoints</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Method</th>
-                    <th>Endpoint</th>
-                    <th>Description</th>
-                    <th>Response</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>GET</td>
-                    <td>/</td>
-                    <td>Welcome</td>
-                    <td>200 OK</td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/api-docs</td>
-                    <td>API Docs</td>
-                    <td>200 OK</td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/incidents</td>
-                    <td>List incidents</td>
-                    <td>200 OK</td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/incidents/:id</td>
-                    <td>Incident by ID</td>
-                    <td>200 OK/404 Not Found</td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/incidents</td>
-                    <td>New incident</td>
-                    <td>201 Created/400 Bad Request</td>
-                </tr>
-                <tr>
-                    <td>DELETE</td>
-                    <td>/incidents/:id</td>
-                    <td>Delete incident</td>
-                    <td>200 OK/404 Not Found</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <h2 id="api-endpoints">📄 API Endpoints</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+                <th>Response Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GET</td>
+                <td><code>/</code></td>
+                <td>Welcome page with GitHub link</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/api-docs</code></td>
+                <td>API documentation in JSON</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/incidents</code></td>
+                <td>Fetch all incidents</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/incidents/:id</code></td>
+                <td>Fetch an incident by ID</td>
+                <td>200 OK / 404 Not Found</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td><code>/incidents</code></td>
+                <td>Create a new incident</td>
+                <td>201 Created / 400 Bad Request</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td><code>/incidents/:id</code></td>
+                <td>Delete an incident by ID</td>
+                <td>200 OK / 404 Not Found</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="section" id="sample-requests-and-responses">
-        <h2>📬 Sample Requests & Responses</h2>
+    <h2 id="sample-requests-and-responses">📬 Sample Requests and Responses</h2>
 
-        <h3>GET /api-docs</h3>
-        <pre><code>{
-            "message": "AI Incident Log API Documentation",
-            "routes": [
-              {
-                "method": "GET",
-                "path": "/incidents",
-                "description": "Get all incidents"
-              },
-              {
-                "method": "GET",
-                "path": "/incidents/:id",
-                "description": "Get a single incident by ID"
-              },
-              {
-                "method": "POST",
-                "path": "/incidents",
-                "description": "Create a new incident (send title, description, severity)"
-              },
-              {
-                "method": "DELETE",
-                "path": "/incidents/:id",
-                "description": "Delete a new incident by id"
-              }
-            ],
-            "github": "https://github.com/yagnesh-3/sparkleHood"
-          }</code></pre>
+    <h3>1. <code>GET /api-docs</code></h3>
+    <ul>
+        <li><strong>Description</strong>: Returns the API documentation in JSON format.</li>
+        <li><strong>Response</strong>:</li>
+    </ul>
+    <pre><code>{
+  "message": "AI Incident Log API Documentation",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/incidents",
+      "description": "Get all incidents"
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/:id",
+      "description": "Get a single incident by ID"
+    },
+    {
+      "method": "POST",
+      "path": "/incidents",
+      "description": "Create a new incident (send title, description, severity)"
+    },
+    {
+      "method": "DELETE",
+      "path": "/incidents/:id",
+      "description": "Delete a new incident by id"
+    }
+  ],
+  "github": "https://github.com/yagnesh-3/sparkleHood"
+}</code></pre>
 
-        <h3>GET /</h3>
-        <pre><code> Welcome to AI Incident Log API
-            Click here to view the GitHub Repository</code></pre>
+    <h3>2. <code>GET /</code></h3>
+    <ul>
+        <li><strong>Description</strong>: Returns a simple welcome message with a GitHub link.</li>
+        <li><strong>Response</strong>:</li>
+    </ul>
+    <pre><code>Welcome to AI incident Log API &lt;a href="https://github.com/yagnesh-3/sparkleHood"&gt;click here&lt;/a&gt;</code></pre>
 
-        <h3>GET /incidents</h3>
-        <pre><code>
-            {
-              "id": "680c64496c3961371a012edb",
-              "title": "Biased Recommendation Algorithm",
-              "description": "Algorithm consistently favored certain demographics...",
-              "severity": "Medium",
-              "reported_at": "2025-03-15T10:00:00Z"
-            },
-            {
-              "id": "680c64496c3961371a012edc",
-              "title": "LLM Hallucination in Critical Info",
-              "description": "LLM provided incorrect safety procedure information...",
-              "severity": "High",
-              "reported_at": "2025-04-01T14:30:00Z"
-            }
-          ]</code></pre>
+    <h3>3. <code>GET /incidents</code></h3>
+    <ul>
+        <li><strong>Description</strong>: Fetch all incidents.</li>
+        <li><strong>Response</strong>:</li>
+    </ul>
+    <pre><code>[
+  {
+    "id": "680c64496c3961371a012edb",
+    "title": "Biased Recommendation Algorithm",
+    "description": "Algorithm consistently favored certain demographics...",
+    "severity": "Medium",
+    "reported_at": "2025-03-15T10:00:00Z"
+  },
+  {
+    "id": "680c64496c3961371a012edc",
+    "title": "LLM Hallucination in Critical Info",
+    "description": "LLM provided incorrect safety procedure information...",
+    "severity": "High",
+    "reported_at": "2025-04-01T14:30:00Z"
+  }
+]</code></pre>
 
-        <h3>POST /incidents</h3>
-        <h4>Request</h4>
-        <pre><code>{
+    <h3>4. <code>GET /incidents/:id</code></h3>
+    <ul>
+        <li><strong>Description</strong>: Fetch a single incident by its id.</li>
+        <li><strong>Request Example</strong>:</li>
+    </ul>
+    <pre><code>GET /incidents/680c64496c3961371a012edb</code></pre>
+    <ul>
+        <li><strong>Response</strong>:</li>
+    </ul>
+    <pre><code>{
+  "id": "680c64496c3961371a012edb",
+  "title": "Biased Recommendation Algorithm",
+  "description": "Algorithm consistently favored certain demographics...",
+  "severity": "Medium",
+  "reported_at": "2025-03-15T10:00:00Z"
+}</code></pre>
+
+    <h3>5. <code>POST /incidents</code></h3>
+    <ul>
+        <li><strong>Description</strong>: Create a new incident.</li>
+        <li><strong>Request Body</strong>:</li>
+    </ul>
+    <pre><code>{
   "title": "Autonomous Vehicle Misjudgment",
-  "description": "Car misjudged object on road",
+  "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
   "severity": "High"
 }</code></pre>
-        <h4>Response</h4>
-        <pre><code>{
-            "id": "661509a2f15c3f5f9b3cfd41",
-            "title": "Autonomous Vehicle Misjudgment",
-            "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
-            "severity": "High",
-            "reported_at": "2025-04-26T12:45:00Z"
-          }</code></pre>
-        <h3>DELETE /incidents/:id</h3>
-        <pre><code>{ "message": "Incident deleted successfully." }</code></pre>
-    </div>
+    <ul>
+        <li><strong>Response</strong>:</li>
+    </ul>
+    <pre><code>{
+  "id": "661509a2f15c3f5f9b3cfd41",
+  "title": "Autonomous Vehicle Misjudgment",
+  "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
+  "severity": "High",
+  "reported_at": "2025-04-26T12:45:00Z"
+}</code></pre>
 
-    <div class="section" id="centralized-error-handling">
-        <h2>🚨 Centralized Error Handling</h2>
-        <p>All errors are handled with a custom middleware for consistency and better client responses.</p>
-    </div>
+    <h3>6. <code>DELETE /incidents/:id</code></h3>
+    <ul>
+        <li><strong>Description</strong>: Delete a specific incident by id.</li>
+        <li><strong>Request Example</strong>:</li>
+    </ul>
+    <pre><code>DELETE /incidents/680c64496c3961371a012edc</code></pre>
+    <ul>
+        <li><strong>Response</strong>:</li>
+    </ul>
+    <pre><code>{
+  "message": "Incident deleted successfully."
+}</code></pre>
+    <ul>
+        <li><strong>If the incident is not found</strong>:</li>
+    </ul>
+    <pre><code>{
+  "error": "Incident not found."
+}</code></pre>
 
-    <div class="section" id="conclusion">
-        <h2>📜 Conclusion & Design Decisions</h2>
-        <p>Centralized error handling, TypeScript type safety, clean code structure, and easy-to-use endpoints make this
-            API robust and scalable.</p>
-    </div>
+    <h2 id="centralized-error-handling-in-api">🚨 Centralized Error Handling in API</h2>
+    <p>This project demonstrates a centralized error-handling mechanism in a Node.js Express API. The goal is to
+        efficiently manage errors across the API using a single middleware function that catches all errors and returns
+        consistent, user-friendly error responses with proper HTTP status codes.</p>
 
-    <div class="section" id="contact">
-        <h2>📬 Contact</h2>
-        <p>Have questions or suggestions? Feel free to open an issue on <a
-                href="https://github.com/yagnesh-3/sparkleHood" target="_blank">GitHub</a>!</p>
-    </div>
+    <h3>📜 Overview</h3>
+    <p>In a typical Express API, errors can occur from various sources, such as invalid user input, database issues, or
+        unexpected server problems. Rather than handling errors individually in each route, we consolidate them in a
+        centralized error handler.</p>
 
+    <p><strong>This provides several advantages</strong>:</p>
+    <ul>
+        <li><strong>Cleaner code</strong> in routes/controllers.</li>
+        <li><strong>Consistent error responses</strong> throughout the app.</li>
+        <li><strong>Easier to manage and update error handling</strong> logic in one place.</li>
+    </ul>
+
+    <h3>🛠 Centralized Error Handling Setup</h3>
+    <p><strong>The error handling system consists of:</strong></p>
+    <ul>
+        <li><strong>Custom error types</strong> (ValidationError, NotFound, CastError, etc).</li>
+        <li>A <strong>centralized errorHandler</strong> middleware that catches and responds to errors.</li>
+    </ul>
+
+    <h3>🔧 How It Works</h3>
+    <ol>
+        <li><strong>Throwing Errors</strong>: In various controller functions (e.g., when an incident is not found or
+            when user input is invalid), errors are thrown with custom name properties. For example:<br>
+            <pre><code>if (!incident) {
+    const error = new Error("Incident not found");
+    error.name = "NotFound";
+    throw error;
+}</code></pre>
+            Here, we create a new Error object and assign a name property that indicates the error type ("NotFound" in
+            this case).
+        </li>
+        <li><strong>Centralized Error Handler</strong>: The error handler middleware captures all errors thrown in the
+            application and sends appropriate responses based on the error type:<br>
+            <pre><code>import { Request, Response, NextFunction } from 'express';
+
+export default function errorHandler(err: any, _: Request, res: Response, __: NextFunction): any {
+    if (err.name === "ValidationError") {
+        return res.status(400).json({ error: "Invalid input. All fields are required and severity must be one of Low, Medium, or High." });
+    }
+    if (err.name === "NotFound") {
+        return res.status(404).json({ error: err.message });
+    }
+    if (err.name === "CastError") {
+        return res.status(400).json({ error: "Invalid ID format" });
+    }
+    return res.status(500).json({ error: err.message });
+}</code></pre>
+            <ul>
+                <li><strong>ValidationError</strong>: Caught for input validation failures (e.g., missing or invalid
+                    fields).</li>
+                <li><strong>NotFound</strong>: Caught when a resource is not found (e.g., an incident doesn't exist).
+                </li>
+                <li><strong>CastError</strong>: Caught when the provided ID is not in the valid ObjectId format.</li>
+                <li><strong>Other errors</strong>: Any other errors are handled as 500 Internal Server Error.</li>
+            </ul>
+        </li>
+        <li><strong>Middleware Integration</strong>: The errorHandler is added as the last middleware in the Express app
+            to ensure that it catches all errors:<br>
+            <pre><code>import errorHandler from './middlewares/errorHandler';
+
+app.use(errorHandler); // Add it after all routes</code></pre>
+        </li>
+    </ol>
+
+    <h3>💡 Benefits of Centralized Error Handling</h3>
+    <ul>
+        <li><strong>Consistency</strong>: Every error is handled in a uniform way, with proper HTTP status codes and
+            clear messages.</li>
+        <li><strong>Maintainability</strong>: Changes to error handling (e.g., adding new error types or modifying
+            response structure) can be made in a single place without modifying each route or controller.</li>
+        <li><strong>Separation of Concerns</strong>: Business logic in your route handlers remains focused on the task
+            at hand, while error handling is handled separately.</li>
+        <li><strong>Extensibility</strong>: New error types can easily be added in the future (e.g.,
+            AuthenticationError, AuthorizationError, etc.).</li>
+    </ul>
+
+    <h3>🌍 Example Flow</h3>
+    <p>Here's an example of how centralized error handling works for different scenarios:</p>
+    <ol>
+        <li><strong>Validation Error</strong>:<br>
+            User sends an incomplete or invalid request (e.g., missing title or an invalid severity).<br>
+            <pre><code>{
+  "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High."
+}</code></pre>
+            <strong>Status Code: 400 (Bad Request)</strong>
+        </li>
+        <li><strong>Not Found</strong>:<br>
+            User requests an incident that doesn't exist.<br>
+            <pre><code>{
+  "error": "Incident not found"
+}</code></pre>
+            <strong>Status Code: 404 (Not Found)</strong>
+        </li>
+        <li><strong>Invalid ID Format</strong>:<br>
+            User sends a non-ObjectId string as the incident ID.<br>
+            <pre><code>{
+  "error": "Invalid ID format"
+}</code></pre>
+            <strong>Status Code: 400 (Bad Request)</strong>
+        </li>
+        <li><strong>Internal Server Error</strong>:<br>
+            Unexpected server issues.<br>
+            <pre><code>{
+  "error": "Internal server error"
+}</code></pre>
+            <strong>Status Code: 500 (Internal Server Error)</strong>
+        </li>
+    </ol>
+
+    <h2 id="conclusion--design-decisions">📝 Conclusion & Design Decisions</h2>
+    <p>In this project, several key design decisions were made to ensure scalability and ease of use:</p>
+    <ul>
+        <li><strong>API Design</strong>: The decision was made to use RESTful APIs for simplicity and compatibility with
+            a wide range of clients.</li>
+        <li><strong>Error Handling</strong>: A centralized error-handling mechanism was implemented to return consistent
+            error responses across all endpoints.</li>
+        <li><strong>Database Choice</strong>: MongoDB was chosen due to its flexibility in handling diverse incident
+            data.</li>
+    </ul>
+    <p>Overall, the design prioritizes maintainability and scalability, allowing for easy future improvements and
+        integrations.</p>
+    <p>For any further inquiries or clarification regarding the project, please feel free to contact me via email or
+        GitHub.</p>
+
+    <h2 id="contact-me">📞 Contact Me</h2>
+    <p>If you have any questions, feedback, or suggestions, feel free to reach out!</p>
+    <ul>
+        <li><strong>Email</strong>: <a href="mailto:yagnesh.glk@gmail.com">yagnesh.glk@gmail.com</a></li>
+        <li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/gylgr">linkedin.com/in/gylgr</a></li>
+        <li><strong>GitHub</strong>: <a href="https://github.com/yagnesh-3">github.com/yagnesh-3</a></li>
+    </ul>
+    <p>I look forward to hearing from you!</p>
 </body>
 
 </html>
