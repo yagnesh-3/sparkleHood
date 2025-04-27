@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Safety Incident Log API - Setup Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #aaa;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin: 40px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>AI Safety Incident Log API</h1>
+    <p>A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents.
+        Deployed on <a href="https://sparkle-hood-three.vercel.app/" target="_blank">Vercel</a>.</p>
+
+    <h2>🛠 Tech Stack</h2>
+    <ul>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>TypeScript</li>
+        <li>MongoDB (Mongoose)</li>
+    </ul>
+
+    <hr>
+
+    <h2>🚀 Features</h2>
+    <ul>
+        <li>Log a new AI incident (title, description, severity)</li>
+        <li>Retrieve all incidents</li>
+        <li>Retrieve a single incident by ID</li>
+        <li>Delete a single incident by ID</li>
+        <li>API Docs at <code>/api-docs</code></li>
+    </ul>
+
+    <hr>
+
+    <h1>🛠 Project Setup Guide - AI Safety Incident Log API</h1>
+    <p>Follow these simple steps to get the project up and running locally or deploy it on Vercel 🚀.</p>
+
+    <h2>1. 📦 Clone the Repository</h2>
+    <pre><code>git clone https://github.com/yagnesh-3/sparkleHood.git
+cd sparkleHood</code></pre>
+
+    <h2>2. 📥 Install Dependencies</h2>
+    <pre><code>npm install</code></pre>
+
+    <h2>3. ⚙️ Create Environment Variables</h2>
+    <p>Create a <code>.env</code> file at the root of your project and add the following:</p>
+    <pre><code>PORT=3000
+MONGODB_URI=your_mongodb_connection_string</code></pre>
+
+    <h2>4. 🖊 Project Scripts</h2>
+    <ul>
+        <li>Start in development mode (with auto-reloading):</li>
+        <pre><code>npm run dev</code></pre>
+        <li>Build TypeScript (optional for production):</li>
+        <pre><code>npm run build</code></pre>
+        <li>Start in production (after build):</li>
+        <pre><code>npm start</code></pre>
+    </ul>
+
+    <h2>5. 🚀 Run Locally</h2>
+    <p>After running <code>npm run dev</code>, your API will be available at:</p>
+    <pre><code>http://localhost:3000</code></pre>
+
+    <p>Test it by visiting:</p>
+    <ul>
+        <li><code>/</code> → Welcome message</li>
+        <li><code>/incidents</code> → Fetch all incidents</li>
+        <li><code>/api-docs</code> → API Documentation</li>
+    </ul>
+
+    <hr>
+
+    <h2>🛠 Folder Purpose</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Folder/File</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>src/config/db.ts</code></td>
+                <td>Database connection setup.</td>
+            </tr>
+            <tr>
+                <td><code>src/controllers/incidentController.ts</code></td>
+                <td>Incident logic (CRUD operations).</td>
+            </tr>
+            <tr>
+                <td><code>src/models/incidentModel.ts</code></td>
+                <td>Defines Incident types or schema.</td>
+            </tr>
+            <tr>
+                <td><code>src/routes/incidentRoutes.ts</code></td>
+                <td>API endpoints.</td>
+            </tr>
+            <tr>
+                <td><code>src/routes/api-docs.routes.ts</code></td>
+                <td>API endpoint for api-docs.</td>
+            </tr>
+            <tr>
+                <td><code>src/middleware/errorHandler.ts</code></td>
+                <td>Centralized error handling.</td>
+            </tr>
+            <tr>
+                <td><code>src/app.ts</code></td>
+                <td>Initializes Express app, middleware, and routes.</td>
+            </tr>
+            <tr>
+                <td><code>src/index.ts</code></td>
+                <td>Connects database and starts server.</td>
+            </tr>
+            <tr>
+                <td><code>vercel.json</code></td>
+                <td>Config to deploy on Vercel.</td>
+            </tr>
+            <tr>
+                <td><code>.gitignore</code></td>
+                <td>Files/folders to ignore in Git.</td>
+            </tr>
+            <tr>
+                <td><code>tsconfig.json</code></td>
+                <td>TypeScript settings.</td>
+            </tr>
+            <tr>
+                <td><code>README.md</code></td>
+                <td>This file! 📄</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>📄 API Endpoints</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+                <th>Response Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GET</td>
+                <td><code>/</code></td>
+                <td>Welcome page with GitHub link</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/api-docs</code></td>
+                <td>API documentation in JSON</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/incidents</code></td>
+                <td>Fetch all incidents</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/incidents/:id</code></td>
+                <td>Fetch an incident by ID</td>
+                <td>200 OK</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td><code>/incidents</code></td>
+                <td>Create a new incident</td>
+                <td>201 Created</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td><code>/incidents/:id</code></td>
+                <td>Delete an incident by ID</td>
+                <td>200 OK</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>📬 Sample Requests and Responses</h2>
+
+    <h3>1. GET /api-docs</h3>
+    <pre><code>{
+  "message": "AI Incident Log API Documentation",
+  "routes": [
+    { "method": "GET", "path": "/incidents", "description": "Get all incidents" },
+    { "method": "GET", "path": "/incidents/:id", "description": "Get a single incident by ID" },
+    { "method": "POST", "path": "/incidents", "description": "Create a new incident" },
+    { "method": "DELETE", "path": "/incidents/:id", "description": "Delete an incident by ID" }
+  ],
+  "github": "https://github.com/yagnesh-3/sparkleHood"
+}</code></pre>
+
+    <h3>2. GET /</h3>
+    <pre><code>Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood">click here</a></code></pre>
+
+    <h3>3. GET /incidents</h3>
+    <pre><code>[
+  {
+    "id": 1,
+    "title": "Biased Recommendation Algorithm",
+    "description": "Algorithm consistently favored certain demographics...",
+    "severity": "Medium",
+    "reported_at": "2025-03-15T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "LLM Hallucination in Critical Info",
+    "description": "LLM provided incorrect safety procedure information...",
+    "severity": "High",
+    "reported_at": "2025-04-01T14:30:00Z"
+  }
+]</code></pre>
+
+    <h3>4. GET /incidents/:id</h3>
+    <pre><code>{
+  "id": 1,
+  "title": "Biased Recommendation Algorithm",
+  "description": "Algorithm consistently favored certain demographics...",
+  "severity": "Medium",
+  "reported_at": "2025-03-15T10:00:00Z"
+}</code></pre>
+
+    <h3>5. POST /incidents</h3>
+    <p><strong>Request Body:</strong></p>
+    <pre><code>{
+  "title": "Autonomous Vehicle Misjudgment",
+  "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
+  "severity": "High"
+}</code></pre>
+    <p><strong>Response:</strong></p>
+    <pre><code>{
+  "id": 4,
+  "title": "Autonomous Vehicle Misjudgment",
+  "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
+  "severity": "High",
+  "reported_at": "2025-04-26T12:45:00Z"
+}</code></pre>
+
+    <h3>6. DELETE /incidents/:id</h3>
+    <pre><code>{
+  "message": "Incident deleted successfully."
+}</code></pre>
+    <p><strong>If the incident is not found:</strong></p>
+    <pre><code>{
+  "error": "Incident not found."
+}</code></pre>
+
+    <hr>
+
+    <h2>🔔 Error Responses</h2>
+
+    <h3>400 Bad Request</h3>
+    <pre><code>{ "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High." }</code></pre>
+
+    <h3>404 Not Found</h3>
+    <pre><code>{ "error": "Incident not found." }</code></pre>
+
+</body>
+
+</html>

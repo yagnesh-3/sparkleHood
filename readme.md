@@ -212,16 +212,101 @@ DELETE /incidents/2
 {
   "error": "Incident not found."
 }
-
 ```
-### 🔔 Error Responses
-- **400 Bad Request**:
+## 🚨 Centralized Error Handling in API
+This project demonstrates a centralized error-handling mechanism in a Node.js Express API. The goal is to efficiently manage errors across the API using a single middleware function that catches all errors and returns consistent, user-friendly error responses with proper HTTP status codes.
+## 📜 Overview
+In a typical Express API, errors can occur from various sources, such as invalid user input, database issues, or unexpected server problems. Rather than handling errors individually in each route, we consolidate them in a centralized error handler.
+
+**This provides several advantages**:
+- **Cleaner code** in routes/controllers.
+- **Consistent error responses** throughout the app.
+- **Easier to manage and update error handling** logic in one place.
+## 🛠 Centralized Error Handling Setup
+**The error handling system consists of:**
+- **Custom error types** (ValidationError, NotFound, CastError, etc).
+- A **centralized errorHandler** middleware that catches and responds to errors.
+
+
+## 🔧 How It Works
+1. **Throwing Errors**: In various controller functions (e.g., when an incident is not found or when user input is invalid), errors are thrown with custom name properties. For example:
 ```json
-{ "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High." }
-
+if (!incident) {
+    const error = new Error("Incident not found");
+    error.name = "NotFound";
+    throw error;
+}
 ```
-- **404 Not Found (if incident with given id does not exist)**:
+Here, we create a new Error object and assign a name property that indicates the error type ("NotFound" in this case).
+
+2. **Centralized Error Handler**: The error handler middleware captures all errors thrown in the application and sends appropriate responses based on the error type:
 ```json
-{ "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High." }
+import { Request, Response, NextFunction } from 'express';
 
+export default function errorHandler(err: any, _: Request, res: Response, __: NextFunction): any {
+    if (err.name === "ValidationError") {
+        return res.status(400).json({ error: "Invalid input. All fields are required and severity must be one of Low, Medium, or High." });
+    }
+    if (err.name === "NotFound") {
+        return res.status(404).json({ error: err.message });
+    }
+    if (err.name === "CastError") {
+        return res.status(400).json({ error: "Invalid ID format" });
+    }
+    return res.status(500).json({ error: err.message });
+}
 ```
+- **ValidationError**: Caught for input validation failures (e.g., missing or invalid fields).
+- **NotFound**: Caught when a resource is not found (e.g., an incident doesn't exist).
+- **CastError**: Caught when the provided ID is not in the valid ObjectId format.
+- **Other errors**: Any other errors are handled as 500 Internal Server Error.
+
+3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
+```json
+import errorHandler from './middlewares/errorHandler';
+
+app.use(errorHandler); // Add it after all routes
+```
+## 💡 Benefits of Centralized Error Handling
+- **Consistency**: Every error is handled in a uniform way, with proper HTTP status codes and clear messages.
+- **Maintainability**: Changes to error handling (e.g., adding new error types or modifying response structure) can be made in a single place without modifying each route or controller.
+- **Separation of Concerns**: Business logic in your route handlers remains focused on the task at hand, while error handling is handled separately.
+- **Extensibility**: New error types can easily be added in the future (e.g., AuthenticationError, AuthorizationError, etc.).
+
+## 🌍 Example Flow
+Here’s an example of how centralized error handling works for different scenarios:
+1. **Validation Error**:
+User sends an incomplete or invalid request (e.g., missing title or an invalid severity).
+```json
+{
+  "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High."
+}
+```
+**Status Code: 400 (Bad Request)**
+
+2. **Not Found**:
+User requests an incident that doesn’t exist.
+```json
+{
+  "error": "Incident not found"
+}
+```
+**Status Code: 404 (Not Found)**
+
+3. **Invalid ID Format**:
+User sends a non-ObjectId string as the incident ID.
+```json
+{
+  "error": "Invalid ID format"
+}
+```
+**Status Code: 400 (Bad Request)**
+
+4. **Internal Server Error**:
+Unexpected server issues.
+```json
+{
+  "error": "Internal server error"
+}
+```
+**Status Code: 500 (Internal Server Error)**
