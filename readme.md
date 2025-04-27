@@ -160,7 +160,7 @@ Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood
 ### 3. `GET /incidents`
 - **Description**: Fetch all incidents.
 - **Response**:
-```json
+```bash
 [
   {
     "id": 680c64496c3961371a012edb,
@@ -185,9 +185,9 @@ Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood
 GET /incidents/680c64496c3961371a012edb
 ```
 - **Response**:
-```json
+```bash
 {
-  "id": 1,
+  "id": 680c64496c3961371a012edb,
   "title": "Biased Recommendation Algorithm",
   "description": "Algorithm consistently favored certain demographics...",
   "severity": "Medium",
@@ -205,7 +205,7 @@ GET /incidents/680c64496c3961371a012edb
 }
 ```
 - **Response**:
-```json
+```bash
 {
   "id": 661509a2f15c3f5f9b3cfd41,
   "title": "Autonomous Vehicle Misjudgment",
@@ -249,7 +249,7 @@ In a typical Express API, errors can occur from various sources, such as invalid
 
 ## 🔧 How It Works
 1. **Throwing Errors**: In various controller functions (e.g., when an incident is not found or when user input is invalid), errors are thrown with custom name properties. For example:
-```json
+```bash
 if (!incident) {
     const error = new Error("Incident not found");
     error.name = "NotFound";
@@ -259,7 +259,7 @@ if (!incident) {
 Here, we create a new Error object and assign a name property that indicates the error type ("NotFound" in this case).
 
 2. **Centralized Error Handler**: The error handler middleware captures all errors thrown in the application and sends appropriate responses based on the error type:
-```json
+```bash
 import { Request, Response, NextFunction } from 'express';
 
 export default function errorHandler(err: any, _: Request, res: Response, __: NextFunction): any {
