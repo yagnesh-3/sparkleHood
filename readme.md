@@ -281,7 +281,7 @@ export default function errorHandler(err: any, _: Request, res: Response, __: Ne
 - **Other errors**: Any other errors are handled as 500 Internal Server Error.
 
 3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
-```json
+```bash
 import errorHandler from './middlewares/errorHandler';
 
 app.use(errorHandler); // Add it after all routes
