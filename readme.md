@@ -8,9 +8,28 @@ Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
 - Express.js
 - TypeScript
 - MongoDB (Mongoose)
+## 📋 Prerequisites
+Before setting up the project, make sure you have the following installed on your system:
+1. **Node.js (v14 or higher)**
 
+You can download and install Node.js from the official website: https://nodejs.org
 
+2. **npm (Node Package Manager)**
 
+npm is installed automatically with Node.js. You can verify the installation by running:
+```bash
+npm --version
+```
+3. **MongoDB**(for local development)
+
+If you're running MongoDB locally, ensure MongoDB is installed and running. Alternatively, you can use a cloud MongoDB service like [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
+4. **TypeScript**(optional)
+
+If you don't have TypeScript installed globally, you can install it by running:
+```bash
+npm install -g typescript
+```
 ## 🚀 Features
 - **Log a new AI incident** (title, description, severity)
 - **Retrieve all incidents**
@@ -144,14 +163,14 @@ Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood
 ```json
 [
   {
-    "id": 1,
+    "id": 680c64496c3961371a012edb,
     "title": "Biased Recommendation Algorithm",
     "description": "Algorithm consistently favored certain demographics...",
     "severity": "Medium",
     "reported_at": "2025-03-15T10:00:00Z"
   },
   {
-    "id": 2,
+    "id": 680c64496c3961371a012edc,
     "title": "LLM Hallucination in Critical Info",
     "description": "LLM provided incorrect safety procedure information...",
     "severity": "High",
@@ -163,7 +182,7 @@ Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood
 - **Description**: Fetch a single incident by its id.
 - **Request Example**:
 ```bash
-GET /incidents/1
+GET /incidents/680c64496c3961371a012edb
 ```
 - **Response**:
 ```json
@@ -188,7 +207,7 @@ GET /incidents/1
 - **Response**:
 ```json
 {
-  "id": 4,
+  "id": 661509a2f15c3f5f9b3cfd41,
   "title": "Autonomous Vehicle Misjudgment",
   "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
   "severity": "High",
@@ -199,7 +218,7 @@ GET /incidents/1
 - **Description**: Delete a specific incident by id.
 - **Request Example**:
 ```bash
-DELETE /incidents/2
+DELETE /incidents/680c64496c3961371a012edc
 ```
 - **Response**:
 ```json
@@ -230,7 +249,7 @@ In a typical Express API, errors can occur from various sources, such as invalid
 
 ## 🔧 How It Works
 1. **Throwing Errors**: In various controller functions (e.g., when an incident is not found or when user input is invalid), errors are thrown with custom name properties. For example:
-```bash
+```json
 if (!incident) {
     const error = new Error("Incident not found");
     error.name = "NotFound";
@@ -240,7 +259,7 @@ if (!incident) {
 Here, we create a new Error object and assign a name property that indicates the error type ("NotFound" in this case).
 
 2. **Centralized Error Handler**: The error handler middleware captures all errors thrown in the application and sends appropriate responses based on the error type:
-```bash
+```json
 import { Request, Response, NextFunction } from 'express';
 
 export default function errorHandler(err: any, _: Request, res: Response, __: NextFunction): any {
@@ -262,7 +281,7 @@ export default function errorHandler(err: any, _: Request, res: Response, __: Ne
 - **Other errors**: Any other errors are handled as 500 Internal Server Error.
 
 3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
-```bash
+```json
 import errorHandler from './middlewares/errorHandler';
 
 app.use(errorHandler); // Add it after all routes
@@ -310,10 +329,3 @@ Unexpected server issues.
 }
 ```
 **Status Code: 500 (Internal Server Error)**
-
-## 🔚 Conclusion
-The **AI Safety Incident Log API** provides a simple, scalable solution to log and manage AI safety incidents, ensuring a central repository for critical safety-related issues. This API is designed with robust error handling, providing consistent responses for various error scenarios, making it easy for developers to integrate and maintain.
-
-With a well-structured codebase, centralized error management, and clear API documentation, this project is ideal for managing incidents related to AI systems and can be easily extended to accommodate additional features in the future.
-
-Feel free to clone the repository, set it up locally, and contribute to the project!
