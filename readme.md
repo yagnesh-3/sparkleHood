@@ -230,7 +230,7 @@ In a typical Express API, errors can occur from various sources, such as invalid
 
 ## 🔧 How It Works
 1. **Throwing Errors**: In various controller functions (e.g., when an incident is not found or when user input is invalid), errors are thrown with custom name properties. For example:
-```json
+```bash
 if (!incident) {
     const error = new Error("Incident not found");
     error.name = "NotFound";
@@ -240,7 +240,7 @@ if (!incident) {
 Here, we create a new Error object and assign a name property that indicates the error type ("NotFound" in this case).
 
 2. **Centralized Error Handler**: The error handler middleware captures all errors thrown in the application and sends appropriate responses based on the error type:
-```json
+```bash
 import { Request, Response, NextFunction } from 'express';
 
 export default function errorHandler(err: any, _: Request, res: Response, __: NextFunction): any {
@@ -262,7 +262,7 @@ export default function errorHandler(err: any, _: Request, res: Response, __: Ne
 - **Other errors**: Any other errors are handled as 500 Internal Server Error.
 
 3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
-```json
+```bash
 import errorHandler from './middlewares/errorHandler';
 
 app.use(errorHandler); // Add it after all routes
