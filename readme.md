@@ -1,3 +1,23 @@
+# AI Safety Incident Log API
+
+A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents.  
+Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
+
+## 🛠 Tech Stack
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB (Mongoose)
+
+---
+
+## 🚀 Features
+- **Log a new AI incident** (title, description, severity)
+- **Retrieve all incidents**
+- **Retrieve a single incident by ID**
+- **Deletes a single incident by ID**
+- **API Docs at `/api-docs`**
+---
 # 🛠 Project Setup Guide - AI Safety Incident Log API
 
 Welcome to the setup guide for the **AI Safety Incident Log API**!  
@@ -51,47 +71,130 @@ Test it by visiting
 
 
 
-# AI Safety Incident Log API
 
-A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents.  
-Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
-
-## 🛠 Tech Stack
-- Node.js
-- Express.js
-- TypeScript
-- MongoDB (Mongoose)
-
----
-
-## 🚀 Features
-- **Log a new AI incident** (title, description, severity)
-- **Retrieve all incidents**
-- **Retrieve a single incident by ID**
-- **Deletes a single incident by ID**
-- **API Docs at `/api-docs`**
----
 
 ## 📄 API Endpoints
 
-| Method | Endpoint              | Description                       |Response|
-|:-------|:-----------------------|:----------------------------------|------------|
-| GET    | `/`                    | Welcome page with GitHub link     |200 OK|
-| GET    | `/api-docs`             | API documentation in JSON        |200 OK|
-| GET    | `/incidents`            | Fetch all incidents              |200 OK|
-| GET    | `/incidents/:id`        | Fetch an incident by ID          |200 OK|
-| POST   | `/incidents`            | Create a new incident            |200 OK|
+| Method | Endpoint            | Description                    | Response Code |
+|:-------|:---------------------|:-------------------------------|:--------------|
+| GET    | `/`                  | Welcome page with GitHub link  | 200 OK        |
+| GET    | `/api-docs`           | API documentation in JSON      | 200 OK        |
+| GET    | `/incidents`          | Fetch all incidents            | 200 OK        |
+| GET    | `/incidents/:id`      | Fetch an incident by ID        | 200 OK        |
+| POST   | `/incidents`          | Create a new incident          | 201 Created   |
+| DELETE | `/incidents/:id`      | Delete an incident by ID       | 200 OK        |
 
 ---
 
-## 🧪 Example JSON Payload for POST `/incidents`
+## 📬 Sample Requests and Responses
+
+### 1. `GET /api-docs`
+- **Description**: Returns the API documentation in JSON format.
+- **Response**:
 ```json
 {
-  "title": "LLM Hallucination in Critical Info",
-  "description": "LLM provided incorrect safety procedure information.",
+  "message": "AI Incident Log API Documentation",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/incidents",
+      "description": "Get all incidents"
+    },
+    {
+      "method": "GET",
+      "path": "/incidents/:id",
+      "description": "Get a single incident by ID"
+    },
+    {
+      "method": "POST",
+      "path": "/incidents",
+      "description": "Create a new incident (send title, description, severity)"
+    },
+    {
+      "method": "DELETE",
+      "path": "/incidents/:id",
+      "description": "Delete a new incident by id"
+    }
+  ],
+  "github": "https://github.com/yagnesh-3/sparkleHood"
+}
+```
+### 2. `GET /`
+- **Description**: Returns a simple welcome message with a GitHub link.
+- **Response**:
+```html
+Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood">click here</a>
+```
+### 3. `GET /incidents`
+- **Description**: Fetch all incidents.
+- **Response**:
+```json
+[
+  {
+    "id": 1,
+    "title": "Biased Recommendation Algorithm",
+    "description": "Algorithm consistently favored certain demographics...",
+    "severity": "Medium",
+    "reported_at": "2025-03-15T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "LLM Hallucination in Critical Info",
+    "description": "LLM provided incorrect safety procedure information...",
+    "severity": "High",
+    "reported_at": "2025-04-01T14:30:00Z"
+  }
+]
+```
+### 4. `GET /incidents/:id`
+- **Description**: Fetch a single incident by its id.
+- **Request Example**:
+```bash
+GET /incidents/1
+```
+- **Response**:
+```json
+{
+  "id": 1,
+  "title": "Biased Recommendation Algorithm",
+  "description": "Algorithm consistently favored certain demographics...",
+  "severity": "Medium",
+  "reported_at": "2025-03-15T10:00:00Z"
+}
+```
+### 5. `POST /incidents`
+- **Description**: Create a new incident.
+- **Request Body**:
+```json 
+{
+  "title": "Autonomous Vehicle Misjudgment",
+  "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
   "severity": "High"
 }
 ```
+- **Response**:
+```json
+{
+  "id": 4,
+  "title": "Autonomous Vehicle Misjudgment",
+  "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
+  "severity": "High",
+  "reported_at": "2025-04-26T12:45:00Z"
+}
+```
+### 6. `DELETE /incidents/:id`
+- **Description**: Delete a specific incident by id.
+- **Request Example**:
+```bash
+DELETE /incidents/2
+```
+- **Response**:
+```json
+{
+  "message": "Incident deleted successfully."
+}
+```
+
 
 
 

@@ -33,5 +33,5 @@ export const createIncident = async (req: Request, res: Response) => {
 export const deleteIncident = async (req: Request, res: Response) => {
     const incident = await Incident.findByIdAndDelete(req.params.id);
     if (!incident) res.status(404).json({ error: "Incident not found" });
-    res.status(204).send();
+    res.status(200).json({ "message": "Incident deleted successfully." });
 }
