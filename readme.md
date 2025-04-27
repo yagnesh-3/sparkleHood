@@ -18,7 +18,6 @@ Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
 - **Deletes a single incident by ID**
 - **API Docs at `/api-docs`**
 ---
----
 # 🛠 Project Setup Guide - AI Safety Incident Log API
 
 Welcome to the setup guide for the **AI Safety Incident Log API**!  
