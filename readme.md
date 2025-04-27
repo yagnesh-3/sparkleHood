@@ -180,7 +180,7 @@ Test it by visiting
 ### 2. `GET /`
 - **Description**: Returns a simple welcome message with a GitHub link.
 - **Response**:
-```html
+```bash
 Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood">click here</a>
 ```
 ### 3. `GET /incidents`
@@ -189,14 +189,14 @@ Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood
 ```bash
 [
   {
-    "id": 680c64496c3961371a012edb,
+    "id": "680c64496c3961371a012edb",
     "title": "Biased Recommendation Algorithm",
     "description": "Algorithm consistently favored certain demographics...",
     "severity": "Medium",
     "reported_at": "2025-03-15T10:00:00Z"
   },
   {
-    "id": 680c64496c3961371a012edc,
+    "id": "680c64496c3961371a012edc",
     "title": "LLM Hallucination in Critical Info",
     "description": "LLM provided incorrect safety procedure information...",
     "severity": "High",
@@ -213,7 +213,7 @@ GET /incidents/680c64496c3961371a012edb
 - **Response**:
 ```bash
 {
-  "id": 680c64496c3961371a012edb,
+  "id": "680c64496c3961371a012edb",
   "title": "Biased Recommendation Algorithm",
   "description": "Algorithm consistently favored certain demographics...",
   "severity": "Medium",
@@ -233,7 +233,7 @@ GET /incidents/680c64496c3961371a012edb
 - **Response**:
 ```bash
 {
-  "id": 661509a2f15c3f5f9b3cfd41,
+  "id": "661509a2f15c3f5f9b3cfd41",
   "title": "Autonomous Vehicle Misjudgment",
   "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
   "severity": "High",
