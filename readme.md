@@ -3,6 +3,11 @@
 A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents.  
 Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
 
+## Table of Contents
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Features](#-features)
+
 ## 🛠 Tech Stack
 - Node.js
 - Express.js
@@ -296,7 +301,7 @@ export default function errorHandler(err: any, _: Request, res: Response, __: Ne
 - **Other errors**: Any other errors are handled as 500 Internal Server Error.
 
 3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
-```json
+```bash
 import errorHandler from './middlewares/errorHandler';
 
 app.use(errorHandler); // Add it after all routes
