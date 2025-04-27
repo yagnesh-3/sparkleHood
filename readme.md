@@ -62,18 +62,33 @@ MONGODB_URI=your_mongodb_connection_string
 
 ```
 ## 4. 🖊 Project Scripts
-- Start in development mode (with auto-reloading)
-```bash
+
+In the project directory, you can run the following scripts:
+- **Seed the Database:**
+    ```bash
+    npm run seed
+    ```
+    Runs the `seed.ts` script to populate your database with initial data (such as dummy incidents). This can be useful for testing or development.
+
+- **Development Mode:**
+    ```bash
     npm run dev
-```
-- Build TypeScript (optional for production):
-```bash
+    ```
+    Runs the project in development mode with auto-reloading. It uses `nodemon` to watch for changes in the `src` folder and automatically restarts the server using `ts-node`.
+
+- **Build the Project:**
+    ```bash
     npm run build
-```
-- Start in production (after build):
-```bash
+    ```
+    Compiles the TypeScript files into JavaScript and places them in the `dist` folder.
+
+- **Start the Production Server:**
+    ```bash
     npm start
-```
+    ```
+    Starts the server in production mode, running the compiled JavaScript files from the `dist` directory.
+
+
 ## 5. 🚀 Run Locally
 - After running npm run dev, your API will be available at:
 ```bash
@@ -112,9 +127,9 @@ Test it by visiting
 | GET    | `/`                  | Welcome page with GitHub link  | 200 OK        |
 | GET    | `/api-docs`           | API documentation in JSON      | 200 OK        |
 | GET    | `/incidents`          | Fetch all incidents            | 200 OK        |
-| GET    | `/incidents/:id`      | Fetch an incident by ID        | 200 OK        |
-| POST   | `/incidents`          | Create a new incident          | 201 Created   |
-| DELETE | `/incidents/:id`      | Delete an incident by ID       | 200 OK        |
+| GET    | `/incidents/:id`      | Fetch an incident by ID        | 200 OK / 404 Not Found |
+| POST   | `/incidents`          | Create a new incident          | 201 Created / 400 Bad Request   |
+| DELETE | `/incidents/:id`      | Delete an incident by ID       | 200 OK / 404 Not Found |
 
 
 
@@ -281,7 +296,7 @@ export default function errorHandler(err: any, _: Request, res: Response, __: Ne
 - **Other errors**: Any other errors are handled as 500 Internal Server Error.
 
 3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
-```bash
+```json
 import errorHandler from './middlewares/errorHandler';
 
 app.use(errorHandler); // Add it after all routes
@@ -329,3 +344,12 @@ Unexpected server issues.
 }
 ```
 **Status Code: 500 (Internal Server Error)**
+## 📝 Conclusion & Design Decisions
+In this project, several key design decisions were made to ensure scalability and ease of use:
+- **API Design**: The decision was made to use RESTful APIs for simplicity and compatibility with a wide range of clients.
+- **Error Handling**: A centralized error-handling mechanism was implemented to return consistent error responses across all endpoints.
+- **Database Choice**: MongoDB was chosen due to its flexibility in handling diverse incident data.
+
+Overall, the design prioritizes maintainability and scalability, allowing for easy future improvements and integrations.
+
+For any further inquiries or clarification regarding the project, please feel free to contact me via email or GitHub.
