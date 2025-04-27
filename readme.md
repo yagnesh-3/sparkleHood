@@ -7,6 +7,13 @@ Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Features](#-features)
+- [Project Setup Guide](#-project-setup-guide---ai-safety-incident-log-api)
+- [Folder Purpose](#-folder-purpose)
+- [API Endpoints](#-api-endpoints)
+- [Sample Requests and Responses](#-sample-requests-and-responses)
+- [Centralized Error Handling in API](#-centralized-error-handling-in-api)
+- [Conclusion & Design Decisions](#-conclusion--design-decisions)
+
 
 ## 🛠 Tech Stack
 - Node.js
@@ -42,7 +49,7 @@ npm install -g typescript
 - **Deletes a single incident by ID**
 - **API Docs at `/api-docs`**
 
-# 🛠 Project Setup Guide - AI Safety Incident Log API
+## 🛠 Project Setup Guide - AI Safety Incident Log API
 
 Welcome to the setup guide for the **AI Safety Incident Log API**!  
 Follow these simple steps to get the project up and running locally or deploy it on Vercel 🚀.
@@ -301,7 +308,7 @@ export default function errorHandler(err: any, _: Request, res: Response, __: Ne
 - **Other errors**: Any other errors are handled as 500 Internal Server Error.
 
 3. **Middleware Integration**: The errorHandler is added as the last middleware in the Express app to ensure that it catches all errors:
-```bash
+```json
 import errorHandler from './middlewares/errorHandler';
 
 app.use(errorHandler); // Add it after all routes
@@ -358,3 +365,12 @@ In this project, several key design decisions were made to ensure scalability an
 Overall, the design prioritizes maintainability and scalability, allowing for easy future improvements and integrations.
 
 For any further inquiries or clarification regarding the project, please feel free to contact me via email or GitHub.
+## 📞 Contact Me
+
+If you have any questions, feedback, or suggestions, feel free to reach out!
+
+- **Email**: [yagnesh.glk@gmail.com](mailto:yagnesh.glk@gmail.com)
+- **LinkedIn**: [linkedin.com/in/gylgr](https://www.linkedin.com/in/gylgr)
+- **GitHub**: [github.com/yagnesh-3](https://github.com/yagnesh-3)
+
+I look forward to hearing from you!
