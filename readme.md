@@ -18,6 +18,7 @@ Deployed on [Vercel](https://sparkle-hood-three.vercel.app/).
 - **Deletes a single incident by ID**
 - **API Docs at `/api-docs`**
 ---
+---
 # 🛠 Project Setup Guide - AI Safety Incident Log API
 
 Welcome to the setup guide for the **AI Safety Incident Log API**!  
@@ -66,11 +67,24 @@ Test it by visiting
 - /incidents → Fetch all incidents
 
 - /api-docs → API Documentation 
+## 🛠 Folder Purpose
 
+| Folder/File | Purpose |
+|:---|:---|
+| `src/config/db.ts` | Database connection setup. |
+| `src/controllers/incidentController.ts` | Incident logic (CRUD operations). |
+| `src/models/incidentModel.ts` | Defines Incident types or schema. |
+| `src/routes/incidentRoutes.ts` | API endpoints. |
+| `src/routes/api-docs.routes.ts` | API endpoint for api-docs. |
+| `src/middleware/errorHandler.ts` | Centralized error handling. |
+| `src/app.ts` | Initializes Express app, middleware, and routes. |
+| `src/index.ts` | Connects database and starts server. |
+| `vercel.json` | Config to deploy on Vercel. |
+| `.gitignore` | Files/folders to ignore in Git. |
+| `tsconfig.json` | TypeScript settings. |
+| `README.md` | This file! 📄 |
 
-
-
-
+---
 
 
 ## 📄 API Endpoints
@@ -194,7 +208,21 @@ DELETE /incidents/2
   "message": "Incident deleted successfully."
 }
 ```
+- **If the incident is not found**:
+```json
+{
+  "error": "Incident not found."
+}
 
+```
+### 🔔 Error Responses
+- **400 Bad Request**:
+```json
+{ "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High." }
 
+```
+- **404 Not Found (if incident with given id does not exist)**:
+```json
+{ "error": "Invalid input. All fields are required and severity must be one of Low, Medium, or High." }
 
-
+```

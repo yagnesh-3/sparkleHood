@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { Incident } from "../models/incident.model";
-import { error } from "console";
 export const getAllIncidents = async (_: Request, res: Response) => {
     const incidents = await Incident.find({});
     res.status(200).json(incidents)
