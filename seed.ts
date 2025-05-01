@@ -1,6 +1,5 @@
-import connectDB from './src/config/db'; // Assuming you have a DB connection file
-import { Incident } from './src/models/incident.model'; // The model you want to seed
-
+import connectDB from './src/config/db';
+import { Incident } from './src/models/incident.model';
 async function seedDatabase() {
     try {
 
