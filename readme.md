@@ -3,6 +3,7 @@
 A simple Node.js + Express API (TypeScript) to log and retrieve AI safety incidents. [Live Demo](https://sparkle-hood-three.vercel.app/).
 
 [https://sparkle-hood-three.vercel.app/](https://sparkle-hood-three.vercel.app/)
+![Landing Page](./public/landing.png)
 ## Table of Contents
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
