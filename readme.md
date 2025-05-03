@@ -44,12 +44,24 @@ If you don't have TypeScript installed globally, you can install it by running:
 npm install -g typescript
 ```
 ## 🚀 Features
-- **Log a new AI incident** (title, description, severity)
-- **Retrieve all incidents**
-- **Retrieve a single incident by ID**
-- **Deletes a single incident by ID**
-- **API Docs at `/api-docs`**
+1. **Helmet Security Protection**
+   - The API is protected using Helmet, a middleware that helps secure the app by setting various HTTP headers
+2. **Rate Limiting**
+   - To prevent abuse and excessive requests, the API implements rate limiting using `express-rate-limit`.
+   - **Limit:** 100 requests per IP every 10 minutes.
+   - **Custom Error Response:**
+     - **Status:** `429 Too Many Requests`
+     - **Message:** `Too many requests from this IP, please try again after 10 minutes`
+3. **Error Handling**
+   - The API includes a custom error handler to catch and manage errors gracefully.
+   - When an error occurs (e.g., server errors, invalid routes), a uniform and clear error response is returned to the client.
+4. **API Documentation**
+   - The API is fully documented and accessible at `/api-docs`.
+   - Includes descriptions of all available routes and usage examples for each endpoint.
 
+5. **Incident Logging**
+   - The API allows users to log and manage incidents.
+   - Incident data can be created, read, updated, and deleted through the `/incidents` endpoint.
 ## 🛠 Project Setup Guide - AI Safety Incident Log API
 
 Welcome to the setup guide for the **AI Safety Incident Log API**!  
@@ -140,9 +152,9 @@ Test it by visiting
 | GET    | `/`                  | Welcome page with GitHub link  | 200 OK        |
 | GET    | `/api-docs`           | API documentation in JSON      | 200 OK        |
 | GET    | `/incidents`          | Fetch all incidents            | 200 OK        |
-| GET    | `/incidents/:id`      | Fetch an incident by ID        | 200 OK / 404 Not Found |
+| GET    | `/incidents/:id`      | Fetch an incident by _id        | 200 OK / 404 Not Found |
 | POST   | `/incidents`          | Create a new incident          | 201 Created / 400 Bad Request   |
-| DELETE | `/incidents/:id`      | Delete an incident by ID       | 200 OK / 404 Not Found |
+| DELETE | `/incidents/:id`      | Delete an incident by _id       | 200 OK / 404 Not Found |
 
 
 
@@ -163,7 +175,7 @@ Test it by visiting
     {
       "method": "GET",
       "path": "/incidents/:id",
-      "description": "Get a single incident by ID"
+      "description": "Get a single incident by _id"
     },
     {
       "method": "POST",
@@ -173,32 +185,30 @@ Test it by visiting
     {
       "method": "DELETE",
       "path": "/incidents/:id",
-      "description": "Delete a new incident by id"
+      "description": "Delete a new incident by _id"
     }
   ],
   "github": "https://github.com/yagnesh-3/sparkleHood"
 }
 ```
 ### 2. `GET /`
-- **Description**: Returns a simple welcome message with a GitHub link.
+- **Description**: Returns a simple welcome message with a GitHub link and API Documentation Link.
 - **Response**:
-```bash
-Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood">click here</a>
-```
+![Landing Page](./public/landing.png)
 ### 3. `GET /incidents`
 - **Description**: Fetch all incidents.
 - **Response**:
 ```bash
 [
   {
-    "id": "680c64496c3961371a012edb",
+    "_id": "680c64496c3961371a012edb",
     "title": "Biased Recommendation Algorithm",
     "description": "Algorithm consistently favored certain demographics...",
     "severity": "Medium",
     "reported_at": "2025-03-15T10:00:00Z"
   },
   {
-    "id": "680c64496c3961371a012edc",
+    "_id": "680c64496c3961371a012edc",
     "title": "LLM Hallucination in Critical Info",
     "description": "LLM provided incorrect safety procedure information...",
     "severity": "High",
@@ -207,7 +217,7 @@ Welcome to AI incident Log API <a href="https://github.com/yagnesh-3/sparkleHood
 ]
 ```
 ### 4. `GET /incidents/:id`
-- **Description**: Fetch a single incident by its id.
+- **Description**: Fetch a single incident by its _id(auto genetated field by mongoDB).
 - **Request Example**:
 ```bash
 GET /incidents/680c64496c3961371a012edb
@@ -215,7 +225,7 @@ GET /incidents/680c64496c3961371a012edb
 - **Response**:
 ```bash
 {
-  "id": "680c64496c3961371a012edb",
+  "_id": "680c64496c3961371a012edb",
   "title": "Biased Recommendation Algorithm",
   "description": "Algorithm consistently favored certain demographics...",
   "severity": "Medium",
@@ -235,7 +245,7 @@ GET /incidents/680c64496c3961371a012edb
 - **Response**:
 ```bash
 {
-  "id": "661509a2f15c3f5f9b3cfd41",
+  "_id": "661509a2f15c3f5f9b3cfd41",
   "title": "Autonomous Vehicle Misjudgment",
   "description": "Self-driving car incorrectly identified an obstacle, causing sudden braking.",
   "severity": "High",
@@ -243,7 +253,7 @@ GET /incidents/680c64496c3961371a012edb
 }
 ```
 ### 6. `DELETE /incidents/:id`
-- **Description**: Delete a specific incident by id.
+- **Description**: Delete a specific incident by _id(auto generated by mongoDB).
 - **Request Example**:
 ```bash
 DELETE /incidents/680c64496c3961371a012edc
